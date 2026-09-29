@@ -97,8 +97,8 @@ export default function MovieCard({ item, style = 'poster', rank, matchPercent, 
             </div>
           )}
 
-          {/* معلومات الكارت والأزرار (تظهر دائماً على الموبايل وبتأثير الـ Hover على الشاشات الكبيرة) */}
-          <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2.5 opacity-100 transition-opacity duration-200 sm:opacity-0 sm:group-hover:opacity-100">
+          {/* معلومات الكارت (العنوان والتقييم ظاهرين دائماً) */}
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-2.5 pt-6">
             <Link href={detailHref} className="block">
               <p className="line-clamp-1 text-sm font-semibold text-white hover:underline">{title}</p>
               <div className="mt-1 flex items-center gap-2 text-xs text-gray-300">
@@ -112,7 +112,8 @@ export default function MovieCard({ item, style = 'poster', rank, matchPercent, 
               {remaining && <p className="mt-1 text-xs text-gray-300">{remaining}</p>}
             </Link>
 
-            <div className="mt-2 flex items-center gap-1.5">
+            {/* الأزرار (تظهر دائماً على الموبايل وبتظهر بالـ Hover على الشاشات الكبيرة) */}
+            <div className="mt-2 flex items-center gap-1.5 opacity-100 transition-opacity duration-200 sm:opacity-0 sm:group-hover:opacity-100">
               <button
                 type="button"
                 onClick={handleOpenTrailer}
