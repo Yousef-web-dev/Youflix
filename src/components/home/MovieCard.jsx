@@ -20,7 +20,7 @@ function isRecentRelease(dateString) {
 
 export default function MovieCard({ item, style = 'poster', rank, matchPercent, progress, remaining }) {
   const [added, setAdded] = useState(false);
-  const [showTrailer, setShowTrailer] = useState(false); // State للتحكم في ظهور المودال
+  const [showTrailer, setShowTrailer] = useState(false);
 
   const title = item.title || item.name;
   const dateString = item.release_date || item.first_air_date;
@@ -39,14 +39,12 @@ export default function MovieCard({ item, style = 'poster', rank, matchPercent, 
     }
   }, [item, mediaType]);
 
-  // دالة فتح المودال بدلاً من فتح تاب جديدة
   const handleOpenTrailer = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setShowTrailer(true);
   };
 
-  // دالة الإضافة/الحذف من My List
   const handleToggleList = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -99,8 +97,8 @@ export default function MovieCard({ item, style = 'poster', rank, matchPercent, 
             </div>
           )}
 
-          {/* معلومات الكارت وعند الهوفر */}
-          <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/20 to-transparent p-2.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+          {/* معلومات الكارت والأزرار (تظهر دائماً على الموبايل وبتأثير الـ Hover على الشاشات الكبيرة) */}
+          <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2.5 opacity-100 transition-opacity duration-200 sm:opacity-0 sm:group-hover:opacity-100">
             <Link href={detailHref} className="block">
               <p className="line-clamp-1 text-sm font-semibold text-white hover:underline">{title}</p>
               <div className="mt-1 flex items-center gap-2 text-xs text-gray-300">
@@ -115,7 +113,6 @@ export default function MovieCard({ item, style = 'poster', rank, matchPercent, 
             </Link>
 
             <div className="mt-2 flex items-center gap-1.5">
-              {/* زرار Play يفتح مودال التريلر في نفس الصفحة */}
               <button
                 type="button"
                 onClick={handleOpenTrailer}
@@ -125,17 +122,15 @@ export default function MovieCard({ item, style = 'poster', rank, matchPercent, 
                 <Play className="h-3.5 w-3.5 fill-current" />
               </button>
 
-              {/* زرار الإضافة لقائمة My List */}
               <button
                 type="button"
                 onClick={handleToggleList}
                 className="flex h-7 w-7 group cursor-pointer items-center justify-center rounded-full border border-white/50 bg-black/40 text-white transition-all hover:scale-110 hover:bg-red-900 hover:text-white duration-300"
                 title={added ? "Remove from My List" : "Add to My List"}
               >
-                {added ? <Check className="h-3.5 w-3.5  text-green-500" /> : <Plus className="h-3.5 w-3.5" />}
+                {added ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Plus className="h-3.5 w-3.5" />}
               </button>
 
-              {/* زرار Info للانتقال لصفحة التفاصيل */}
               <Link
                 href={detailHref}
                 className="flex h-7 w-7 items-center justify-center rounded-full border border-white/50 bg-black/40 text-white transition-all hover:scale-110 hover:bg-red-900 duration-300"
@@ -148,7 +143,6 @@ export default function MovieCard({ item, style = 'poster', rank, matchPercent, 
         </div>
       </motion.div>
 
-      {/* عرض المودال في نفس الصفحة عند الضغط على Play */}
       {showTrailer && (
         <TrailerModal
           id={item.id}
