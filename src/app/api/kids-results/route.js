@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getKidsMovies, getKidsSeries, searchMovies, searchSeries } from '../../../components/lib/tmdb';
+import { getKidsMovies, getKidsSeries, searchMovies, searchSeries } from '../../../lib/tmdb';
 
 function tag(results, mediaType) {
   return (results || []).map((item) => ({ ...item, media_type: mediaType }));
