@@ -11,7 +11,9 @@ function remainingLabel(percent) {
 export default function ContinueWatching({ items, error }) {
   if (!error && (!items || items.length === 0)) return null;
 
-  const progressList = items.map((_, index) => {
+  const safeItems = Array.isArray(items) ? items : [];
+
+  const progressList = safeItems.map((_, index) => {
     const percent = MOCK_PROGRESS[index % MOCK_PROGRESS.length];
     return { progress: percent, remaining: remainingLabel(percent) };
   });
@@ -20,7 +22,7 @@ export default function ContinueWatching({ items, error }) {
     <div className="pt-8 sm:pt-12">
       <MovieRow
         title="Continue Watching"
-        items={items}
+        items={safeItems}
         error={error}
         progressList={progressList}
       />
