@@ -1,14 +1,10 @@
+// AuthLayout.jsx
 'use client';
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import AuthBackground from './AuthBackground';
 
-/**
- * Full-viewport shell for /login and /signup. It covers the global Navbar and
- * Footer (so neither has to be edited) and marks them inert while mounted so
- * keyboard focus can't wander into the hidden navigation.
- */
 export default function AuthLayout({ children }) {
   const rootRef = useRef(null);
 
@@ -32,8 +28,9 @@ export default function AuthLayout({ children }) {
     <div ref={rootRef} className="fixed inset-0 z-[70] overflow-y-auto bg-black text-white">
       <AuthBackground />
 
-      <div className="relative mx-auto grid min-h-full w-full max-w-6xl lg:grid-cols-2">
-        <div className="hidden flex-col justify-center px-10 lg:flex">
+      <div className="relative mx-auto min-h-full w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 items-center">
+        {/* القسم الترحيبي الجانبي (يظهر في الشاشات الكبيرة فقط) */}
+        <div className="hidden lg:flex flex-col justify-center px-10 py-12">
           <Link
             href="/"
             className="w-fit rounded text-5xl font-black italic tracking-tight text-[#E50914] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
@@ -48,14 +45,17 @@ export default function AuthLayout({ children }) {
           </p>
         </div>
 
-        <div className="flex flex-col items-center justify-center px-4 py-10 sm:px-8">
+        {/* حاصن الفورم (متجاوب تماماً) */}
+        <div className="flex flex-col items-center justify-center w-full px-4 py-8 sm:px-8">
           <Link
             href="/"
             className="mb-6 rounded text-3xl font-black italic tracking-tight text-[#E50914] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 lg:hidden"
           >
             YouFlix
           </Link>
-          {children}
+          <div className="w-full flex justify-center">
+            {children}
+          </div>
         </div>
       </div>
     </div>
