@@ -80,11 +80,7 @@ export default function SignupForm() {
     });
 
     if (!result.ok) {
-const errorMsg = result.message?.includes('1062') || result.message?.includes('unique')
-        ? "This email is already in use; please log in or use another email"
-        : (result.message || "This email is already in use; please log in or use another email");
-        
-      setFormError(errorMsg);
+      setFormError("there's something wrong, please try again");
       setErrors({
         first_name: result.fieldErrors?.first_name || '',
         last_name: result.fieldErrors?.last_name || '',
