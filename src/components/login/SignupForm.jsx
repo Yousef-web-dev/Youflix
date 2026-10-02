@@ -80,7 +80,7 @@ export default function SignupForm() {
     });
 
     if (!result.ok) {
-      setFormError(result.message);
+      setFormError("there's something wrong, please try again");
       setErrors({
         first_name: result.fieldErrors?.first_name || '',
         last_name: result.fieldErrors?.last_name || '',
